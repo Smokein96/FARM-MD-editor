@@ -22,10 +22,18 @@ def get_all_notes():
         )
 
 @router.post("/add")
-def add_note(note: Note):
+def add_note():
     try:
-        reply = collection.insert_one( dict(note))
-        return note
+        base_note : Note = {"title" : "untitled",
+                            "content" : "Empty"}
+        
+        reply = collection.insert_one(base_note)
+        return {
+            "_id": str(reply.inserted_id),
+            "title": base_note["title"],
+            "content": base_note["content"],
+        }
+
 
     except Exception as e:
         raise HTTPException(
