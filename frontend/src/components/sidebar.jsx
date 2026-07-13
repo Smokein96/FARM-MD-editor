@@ -3,7 +3,7 @@ export function Sidebar({notes ,setSelected}){
     return <>
 
     {/* overall BG */}
-    <div className="bg-teal-800 text-white font-mono w-50 h-screen flex flex-col overflow-y-auto"> 
+    <div className="bg-teal-800 text-white font-mono w-50 h-screen flex flex-col overflow-y-auto relative "> 
         
         {/* Top lip */}
         <div className="bg-teal-900 text-center p-2 font-bold text-xl ">
@@ -32,7 +32,7 @@ export function Sidebar({notes ,setSelected}){
         </div>
 
         {/* Button */}
-        <div className="p-1 m-3 fixed bottom-1 left-1 w-42 text-center cursor-pointer
+        <div className="p-1 m-3 absolute bottom-3 left-3 right-3 text-center cursor-pointer
                         bg-teal-700 drop-shadow-xl/50 border rounded-sm transition-all duration-200 
                          hover:border-amber-50 hover:rounded-2xl hover:bg-teal-800 hover:drop-shadow-teal-500/50">
             

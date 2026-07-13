@@ -1,43 +1,46 @@
 import { useState,useEffect } from 'react'
-import Markdown from 'react-markdown'
-import remarkGfm from "remark-gfm";
+import Markdown from 'react-markdown'; {/* for rendering markdown */}
+import remarkGfm from "remark-gfm"; {/* for git like markdown */}
 
 
 export function Window({note, updateNote}) {
 
-    const [clicked, setClicked] = useState(false)
+    const [clicked, setClicked] = useState(false);      {/* to set the edit and save state */}
     
-    useEffect(() => {
+    useEffect(() => {                                   {/* reset the value of clicked when new note id is selected */}
         setClicked(false)
-    },[note])
+    },[note?.id  ]);                                       {/* earlier set to note, reseted everytime the onChange event was called */}
 
-    if (!note){
+    if (!note){                                         {/* if note === null */}
         return<div className="bg-teal-700 w-screen text-center p-6 font-bold text-2xl font-mono text-amber-50">
                 Select a note
             </div>
     }
     
-    return (
-        <div className="bg-teal-700 w-screen h-screen text-amber-50 font-mono p-6">
+    return (                
+        <div className="bg-teal-700 w-screen h-screen text-amber-50 font-mono p-6 overflow-y-auto"> {/* overall BG */}
 
-            {clicked ? (
-                <>
-                    <div className="flex justify-between items-center mb-6">
+            {clicked ? (         
+                <>  {/* conditional for when clicked and not clicked */}
+                    <div className="flex justify-between items-center mb-6"> {/* overall div */}
 
-                        <input
-                            className="text-6xl bg-transparent border-none outline-none w-full"
+                        {/* take title input if clicked is truthy */}
+                        <input      
+                                                                     
+                            className="text-6xl bg-transparent border-none outline-none w-full" 
                             value={note.title}
                             maxLength={20}
                             onChange={(e) =>
                                 updateNote({
                                     ...note,
                                     title: e.target.value,
-                                })
+                                })                                  
                             }
                         />
-
+                        
+                        {/* button for click event */}
                         <button
-                            onClick={() => setClicked(false)}
+                            onClick={() => setClicked(!clicked)}
                             className="px-4 py-2 bg-teal-900 rounded hover:bg-teal-800"
                         >
                             Save
@@ -45,6 +48,7 @@ export function Window({note, updateNote}) {
 
                     </div>
 
+                    {/* content input */}
                     <textarea
                         className="w-full h-[80vh] bg-transparent outline-none resize-none"
                         value={note.content}
@@ -56,8 +60,11 @@ export function Window({note, updateNote}) {
                         }
                     />
                 </>
-            ) : (
+                
+            ) : ( 
+                
                 <>
+                    {/* render if clicked is falsy */}
                     <div className="flex justify-between items-center mb-6">
 
                         <h1 className="text-6xl font-bold">
@@ -65,7 +72,7 @@ export function Window({note, updateNote}) {
                         </h1>
 
                         <button
-                            onClick={() => setClicked(true)}
+                            onClick={() => setClicked(!clicked)}
                             className="px-4 py-2 bg-teal-900 rounded hover:bg-teal-800"
                         >
                             Edit
@@ -74,7 +81,7 @@ export function Window({note, updateNote}) {
                     </div>
 
                     <div className="prose prose-invert max-w-none">
-                        <Markdown remarkPlugins={[remarkGfm]}>
+                        <Markdown remarkPlugins={[remarkGfm]} >
                             {note.content}
                         </Markdown>
                     </div>
