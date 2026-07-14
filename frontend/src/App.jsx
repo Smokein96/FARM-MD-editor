@@ -17,9 +17,10 @@ function App() {
     toast(message)
   }
 
-  useEffect(() => {
-    load_Notes();
-    notify("Notes loaded successfully");
+useEffect(() => {
+    load_Notes()
+        .then(() => notify("Notes loaded successfully"))
+        .catch((e) => { notify("Could not load notes"); })
   }, []);
 
   async function load_Notes() {

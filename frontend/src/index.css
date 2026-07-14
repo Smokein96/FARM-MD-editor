@@ -1,2 +1,22 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+
+.dark {
+  --bg: #0f172a;
+  --sidebar: #1e293b;
+  --sidebar-hover: #334155;
+  --text: #f8fafc;
+  --button: #475569;
+}
+
+.light {
+  --bg: #ffffff;
+  --sidebar: #f1f5f9;
+  --sidebar-hover: #e2e8f0;
+  --text: #0f172a;
+  --button: #cbd5e1;
+}
+
+
+

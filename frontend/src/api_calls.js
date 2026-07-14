@@ -8,6 +8,7 @@ export async function get_all(){
     
     const result = await resp.json();
     return result;
+    
   } catch (e) {
     throw e;
   }
