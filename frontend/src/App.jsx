@@ -18,8 +18,8 @@ function App() {
   }
 
 useEffect(() => {
-    load_Notes()
-        .then(() => notify("Notes loaded successfully"))
+      load_Notes()
+        .then(() => notify("connection established"))
         .catch((e) => { notify("Could not load notes"); })
   }, []);
 
