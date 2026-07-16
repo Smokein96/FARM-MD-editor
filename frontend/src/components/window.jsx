@@ -10,7 +10,7 @@ export function Window({ note, updateNote, deleteNote, updateServer }) {
     useEffect(() => {
         {/* reset the value of clicked when new note id is selected */ }
         setClicked(false)
-    }, [note ? note.id : null]); {/* earlier set to note, reseted everytime the onChange event was called */ }
+    }, [note ? note._id : null]); {/* earlier set to note, reseted everytime the onChange event was called */ }
 
     if (!note) {
         {/* if note === null */ }

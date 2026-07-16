@@ -11,5 +11,6 @@ client = MongoClient(uri, server_api=ServerApi("1"))
 
 DB = client.farm
 
-collection = DB["notes"]
+collection_notes = DB["notes"]
+collection_user = DB["user"]
 

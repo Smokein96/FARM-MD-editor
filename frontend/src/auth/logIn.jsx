@@ -1,7 +1,12 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+
+import {login} from "./auth_api.js"
 
 export function LogIn() {
+
+    const navigate = useNavigate()
 
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
@@ -10,7 +15,7 @@ export function LogIn() {
         toast(message)
     }
 
-    function handleCheck(e) {
+    async function handleCheck(e) {
         e.preventDefault();
 
         if (!userName || !password) {
@@ -18,7 +23,19 @@ export function LogIn() {
             return;
         }
 
-        notify("Logging In");
+        try{
+            const result = await login(userName, password)
+
+            localStorage.setItem(
+                "token", result.access_token
+            );
+
+            navigate("/notes")
+            notify("Logged in succesfully")
+
+        }catch(e){
+            notify(e.message)
+        }
     }   
 
     return (

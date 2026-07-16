@@ -1,7 +1,14 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { setup } from "./auth_api.js"
+
 import { ToastContainer, toast } from 'react-toastify';
 
+
+
 export function SignIn() {
+
+    const navigate = useNavigate()
 
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
@@ -11,7 +18,7 @@ export function SignIn() {
         toast(message)
     }
 
-    function handleCheck(e) {
+    async function handleCheck(e) {
         e.preventDefault();
 
         if (!userName || !password || !Cpassword) {
@@ -24,8 +31,17 @@ export function SignIn() {
             return;
         }
 
-        notify("Creating administrator...");
-    }   
+        try {
+            const result = await setup(userName, password)
+            notify("Administrator created! Redirecting to login...");
+            setTimeout(() => navigate("/login"), 1500);
+
+        } catch (e) {
+            notify(e.message)
+        }
+    }
+
+
 
     return (
         <div className="min-h-screen bg-teal-800 flex items-center justify-center font-mono">
@@ -51,7 +67,7 @@ export function SignIn() {
                             placeholder="Enter username"
                             className="w-full p-3 rounded bg-teal-800 border border-teal-700
                                        focus:outline-none focus:border-amber-400"
-                            onChange={ (e) => {setUserName(e.target.value) }}
+                            onChange={(e) => { setUserName(e.target.value) }}
                         />
                     </div>
 
@@ -65,7 +81,7 @@ export function SignIn() {
                             placeholder="Enter password"
                             className="w-full p-3 rounded bg-teal-800 border border-teal-700
                                        focus:outline-none focus:border-amber-400"
-                            onChange={ (e) => {setPassword(e.target.value) }}
+                            onChange={(e) => { setPassword(e.target.value) }}
                         />
                     </div>
 
@@ -79,7 +95,7 @@ export function SignIn() {
                             placeholder="Confirm password"
                             className="w-full p-3 rounded bg-teal-800 border border-teal-700
                                        focus:outline-none focus:border-amber-400"
-                            onChange={ (e) => {setCpassword(e.target.value) }}
+                            onChange={(e) => { setCpassword(e.target.value) }}
                         />
                     </div>
 

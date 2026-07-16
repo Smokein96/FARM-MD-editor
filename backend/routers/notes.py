@@ -1,9 +1,11 @@
-from fastapi import HTTPException,APIRouter
+from fastapi import HTTPException,APIRouter,Depends
 from bson import ObjectId
 
 from DB.models import Note
-from DB.config import collection
-from DB.schemas import all_data,individual_data
+from DB.config import collection_notes
+from DB.schemas import all_data
+
+from auth.dependencies import get_current_user
 
 router = APIRouter(
     prefix="/notes" ,
@@ -11,10 +13,11 @@ router = APIRouter(
 )
 
 @router.get("/")
-def get_all_notes():
+def get_all_notes(current_user = Depends(get_current_user)):
     try:
-        all_notes = collection.find()
+        all_notes = collection_notes.find()
         return all_data(all_notes)
+    
     except Exception as e:
         raise HTTPException(
             status_code = 404,
@@ -22,12 +25,12 @@ def get_all_notes():
         )
 
 @router.post("/add")
-def add_note():
+def add_note(current_user = Depends(get_current_user)):
     try:
         base_note : Note = {"title" : "untitled",
                             "content" : "Empty"}
         
-        reply = collection.insert_one(base_note)
+        reply = collection_notes.insert_one(base_note)
         return {
             "_id": str(reply.inserted_id),
             "title": base_note["title"],
@@ -42,9 +45,9 @@ def add_note():
         )
 
 @router.put("/update")
-def update_note(id:str,note : Note):
+def update_note(id:str, note : Note, current_user = Depends(get_current_user) ):
     try:
-        result = collection.update_one(
+        result = collection_notes.update_one(
             {"_id" : ObjectId(id)},
             {
                 "$set" : {
@@ -62,22 +65,22 @@ def update_note(id:str,note : Note):
         )
     
 @router.delete("/delete")
-def delete_note(id:str):
+def delete_note(id:str, current_user = Depends(get_current_user)):
     try:
-        result = collection.delete_one({"_id" : ObjectId(id)})
-        if result.deleted_count == 0:
-            raise HTTPException(
-                status_code = 404,
-                detail = "note not found"
-            )
-        else:
-            return {"message": "note deleted successfully"}
-
+        result = collection_notes.delete_one({"_id" : ObjectId(id)})
     except Exception as e:
         raise HTTPException(
-            status_code = 404,
-            detail = f" unable to delete note {e}"
+            status_code = 500,
+            detail = f"Unable to delete note: {e}"
         )
+
+    if result.deleted_count == 0:
+        raise HTTPException(
+            status_code = 404,
+            detail = "Note not found"
+        )
+
+    return {"message": "note deleted successfully"}
 
     
 
