@@ -1,6 +1,6 @@
 export async function setup(username, password){
     const resp = await fetch(
-        "http://127.0.0.1:8000/auth/setup",
+        "https://md-x-api.onrender.com/auth/setup",
 
         {
             method : "POST",
@@ -33,7 +33,7 @@ export async function login(username, password) {
     form.append("password", password);
 
     const resp = await fetch(
-        "http://127.0.0.1:8000/auth/login"
+        "https://md-x-api.onrender.com/auth/login"
     ,{
         method : "POST",
         body : form

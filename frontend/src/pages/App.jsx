@@ -55,11 +55,12 @@ useEffect(() => {
 
     try {
       const newNote = await make_note();
+      
+      await notify("New note created successfully");
 
       setNotes((prevNotes) => [newNote, ...prevNotes]);
       setselectedNote(newNote);
 
-      notify("New note created successfully");
     } catch (e) {
       notify(`Server failes to add notes \n ${e.message}`);
     }
@@ -70,7 +71,9 @@ useEffect(() => {
       await delete_note(id);
 
       await load_Notes();
+
       setselectedNote(null);
+
       notify("Deleted successfully");
 
     } catch (e) {
@@ -81,10 +84,12 @@ useEffect(() => {
   async function updateServer(id, note){
     try{
       await update_note(id,note);
-
-      await load_Notes();
       
+      
+      await load_Notes();
       notify("note updated")
+      
+      
     } catch(e){
       notify(`error while updating \n ${e.message}`)
     }

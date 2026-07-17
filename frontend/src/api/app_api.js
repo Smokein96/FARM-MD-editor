@@ -1,4 +1,6 @@
-export async function authorizedFetch(url, options = {}) {
+export async function authorizedFetch(suffix, options = {}) {
+
+    const url = `https://md-x-api.onrender.com/${suffix}`
 
     const token = localStorage.getItem("token");
 
@@ -38,7 +40,7 @@ export async function authorizedFetch(url, options = {}) {
 export async function get_all() {
 
     const resp = await authorizedFetch(
-        "http://127.0.0.1:8000/notes/"
+        "notes/"
     );
 
     return await resp.json();
@@ -47,7 +49,7 @@ export async function get_all() {
 export async function make_note() {
 
     const resp = await authorizedFetch(
-        "http://127.0.0.1:8000/notes/add",
+        "notes/add",
         {
             method: "POST",
         }
@@ -59,7 +61,7 @@ export async function make_note() {
 export async function delete_note(id) {
 
     const resp = await authorizedFetch(
-        `http://127.0.0.1:8000/notes/delete?id=${id}`,
+        `notes/delete?id=${id}`,
         {
             method: "DELETE",
         }
@@ -71,7 +73,7 @@ export async function delete_note(id) {
 export async function update_note(id, note) {
 
     const resp = await authorizedFetch(
-        `http://127.0.0.1:8000/notes/update?id=${id}`,
+        `notes/update?id=${id}`,
         {
             method: "PUT",
             headers: {
