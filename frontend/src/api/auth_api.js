@@ -1,6 +1,9 @@
+
+base_url = "https://md-x-api.onrender.com/"
+
 export async function setup(username, password){
     const resp = await fetch(
-        "https://md-x-api.onrender.com/auth/setup",
+        `${base_url}auth/setup`,
 
         {
             method : "POST",
@@ -33,7 +36,7 @@ export async function login(username, password) {
     form.append("password", password);
 
     const resp = await fetch(
-        "https://md-x-api.onrender.com/auth/login"
+        `${base_url}auth/login`
     ,{
         method : "POST",
         body : form

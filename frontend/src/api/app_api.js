@@ -1,6 +1,8 @@
 export async function authorizedFetch(suffix, options = {}) {
 
-    const url = `https://md-x-api.onrender.com/${suffix}`
+    const base_url = "https://md-x-api.onrender.com/"
+
+    const url = `${base_url}${suffix}`
 
     const token = localStorage.getItem("token");
 
