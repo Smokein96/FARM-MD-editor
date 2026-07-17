@@ -33,7 +33,13 @@ export function LogIn() {
             navigate("/notes")
             notify("Logged in succesfully")
 
-        }catch(e){
+        } catch (e) {
+            navigate("*",{
+                state:{
+                    status_code: e.status_code,
+                    error : e.message
+                }
+            })
             notify(e.message)
         }
     }   
@@ -50,7 +56,7 @@ export function LogIn() {
                     Login
                 </p>
 
-                <form className="space-y-5" onSubmit={handleCheck}>
+                <form className="space-y-5 flex flex-col" onSubmit={handleCheck}>
 
                     <div>
                         <label className="block mb-2">
@@ -90,7 +96,7 @@ export function LogIn() {
                     </button>
                     <button
                         type="submit"
-                        className="w-full bg-teal-600 hover:bg-teal-400
+                        className="w-fit self-center bg-teal-600 hover:bg-teal-400
                                    rounded p-3 font-bold transition-all
                                    hover:shadow-lg hover:shadow-teal-500/40"
                         onClick={() => {navigate("/setup")}}

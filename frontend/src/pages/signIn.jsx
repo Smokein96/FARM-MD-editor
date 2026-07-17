@@ -37,7 +37,12 @@ export function SignIn() {
             setTimeout(() => navigate("/login"), 1500);
 
         } catch (e) {
-            navigate("*")
+            navigate("*",{
+                state:{
+                    status_code: e.status_code,
+                    error : e.message
+                }
+            })
             notify(e.message)
         }
     }
@@ -46,7 +51,7 @@ export function SignIn() {
 
     return (
         <div className="min-h-screen bg-teal-800 flex items-center justify-center font-mono">
-            <div className="w-full max-w-md bg-teal-900 rounded-xl shadow-2xl p-8 text-amber-50">
+            <div className="w-full max-w-md bg-teal-900 rounded-xl shadow-2xl p-8 text-amber-50 ">
 
                 <h1 className="text-4xl font-bold text-center mb-2">
                     Md.X
@@ -56,7 +61,7 @@ export function SignIn() {
                     First-time setup
                 </p>
 
-                <form className="space-y-5" onSubmit={handleCheck}>
+                <form className="space-y-5 flex flex-col" onSubmit={handleCheck}>
 
                     <div>
                         <label className="block mb-2">
@@ -111,7 +116,7 @@ export function SignIn() {
 
                     <button
                         type="submit"
-                        className="w-full bg-teal-600 hover:bg-teal-400
+                        className="w-fit self-center bg-teal-600 hover:bg-teal-400
                                    rounded p-3 font-bold transition-all
                                    hover:shadow-lg hover:shadow-teal-500/40"
                         onClick={() => {navigate("/LogIn")}}

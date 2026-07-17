@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { Sidebar } from "../components/sidebar.jsx"
 import { Window } from "../components/window.jsx"
@@ -8,6 +9,8 @@ import { get_all, make_note, delete_note, update_note } from "../api/app_api.js"
 
 
 function App() {
+
+  const navigate = useNavigate()
 
   const [notes, setNotes] = useState([])
 
@@ -20,7 +23,13 @@ function App() {
 useEffect(() => {
       load_Notes()
         .then(() => notify("connection established"))
-        .catch((e) => { notify("Could not load notes"); })
+        .catch((e) => { navigate("*",{
+            state:{
+                    status_code: e.status_code,
+                    error : e.message
+                }
+            }) 
+          })
   }, []);
 
   async function load_Notes() {
@@ -52,8 +61,7 @@ useEffect(() => {
 
       notify("New note created successfully");
     } catch (e) {
-      console.error(e);
-      notify("Server failed to create a new note");
+      notify(`Server failes to add notes \n ${e.message}`);
     }
   }
 
@@ -66,7 +74,7 @@ useEffect(() => {
       notify("Deleted successfully");
 
     } catch (e) {
-      notify("Error during deleting");
+      notify(`Error during deleting ${e.message}`);
     }
   }
 
@@ -78,7 +86,7 @@ useEffect(() => {
       
       notify("note updated")
     } catch(e){
-      notify("error while updating")
+      notify(`error while updating \n ${e.message}`)
     }
   }
 

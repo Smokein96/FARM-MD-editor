@@ -13,12 +13,22 @@ export async function authorizedFetch(url, options = {}) {
 
     if (response.status === 401) {
         localStorage.removeItem("token");
-        window.location.href = "/login";
-        throw new Error("Session expired");
+        window.location.href = "*";
+
+
+        throw {
+            status_code : 404,
+            message : "Expired Token, Log in again"
+        };
     }
 
     if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+
+        const error = await response.json();
+        throw {
+            status_code : response.status,
+            message : error.detail
+        };
     }
 
     return response;

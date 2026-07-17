@@ -1,7 +1,7 @@
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends,HTTPException
 
-from jose import jwt, JWTError
+from jose import jwt, JWTError, ExpiredSignatureError
 
 from DB.config import collection_user
 from auth.jwt_handler import SECRET_KEY,ALGO
@@ -25,6 +25,13 @@ def get_current_user(token: str = Depends(oauth2scheme)):
                 status_code=410,
                 detail="Invalid token"
             )
+        
+    except ExpiredSignatureError:
+        raise HTTPException(
+            status_code=401,
+            detail="Token expired"
+        )
+
     except JWTError:
         raise HTTPException(
             status_code=401,

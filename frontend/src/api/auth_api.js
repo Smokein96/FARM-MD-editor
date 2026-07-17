@@ -17,7 +17,10 @@ export async function setup(username, password){
     if (!resp.ok){
         const error = await resp.json();
 
-        throw new Error(error.detail);
+        throw {
+            status_code : resp.status,
+            message : error.detail
+        }
     }
     
     return await resp.json();
@@ -38,7 +41,10 @@ export async function login(username, password) {
     
     if (!resp.ok){
         const error = await resp.json();
-        throw new Error(error.detail)
+        throw {
+            status_code : resp.status,
+            message : error.detail
+        }
     }
 
     return await resp.json()

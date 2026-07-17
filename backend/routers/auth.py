@@ -41,7 +41,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
     if db_user is None :
         raise HTTPException(status_code=401,
-                            detail="invalid username or password")
+                            detail="User not Found, Complete setup first")
     
     if not verify_pass( form_data.password, db_user["password"] ):
         raise HTTPException(status_code=401, 
