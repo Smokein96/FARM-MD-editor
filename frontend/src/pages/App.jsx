@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 
-import { Sidebar } from "./components/sidebar.jsx"
-import { Window } from "./components/window.jsx"
+import { Sidebar } from "../components/sidebar.jsx"
+import { Window } from "../components/window.jsx"
 import { ToastContainer, toast } from 'react-toastify';
 
-import { get_all, make_note, delete_note, update_note } from "./api_calls.js"
+import { get_all, make_note, delete_note, update_note } from "../api/app_api.js"
 
 
 function App() {

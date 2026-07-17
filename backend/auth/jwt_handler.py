@@ -7,7 +7,7 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGO = os.getenv("ALGO")
 
-ACCESS_TOKEN_EXPIRY_TIME = 30
+ACCESS_TOKEN_EXPIRY_TIME = 10
 
 def create_access_token(username: str):
 

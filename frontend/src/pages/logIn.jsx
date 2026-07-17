@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
-import {login} from "./auth_api.js"
+import {login} from "../api/auth_api.js"
 
 export function LogIn() {
 
@@ -43,7 +43,7 @@ export function LogIn() {
             <div className="w-full max-w-md bg-teal-900 rounded-xl shadow-2xl p-8 text-amber-50">
 
                 <h1 className="text-4xl font-bold text-center mb-2">
-                    Note Master
+                    Md.X
                 </h1>
 
                 <p className="text-center text-gray-300 mb-8" >
@@ -87,6 +87,15 @@ export function LogIn() {
                                    hover:shadow-lg hover:shadow-teal-500/40"
                     >
                         Log into Vault
+                    </button>
+                    <button
+                        type="submit"
+                        className="w-full bg-teal-600 hover:bg-teal-400
+                                   rounded p-3 font-bold transition-all
+                                   hover:shadow-lg hover:shadow-teal-500/40"
+                        onClick={() => {navigate("/setup")}}
+                    >
+                        Sign In
                     </button>
 
                     <ToastContainer

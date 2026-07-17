@@ -4,9 +4,9 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 
 import './index.css'
 
-import App from './App.jsx'
-import { SignIn } from './auth/signIn.jsx'
-import { LogIn } from './auth/logIn.jsx'
+import App from './pages//App.jsx'
+import { SignIn } from './pages/signIn.jsx'
+import { LogIn } from './pages/logIn.jsx'
 import { NotFound } from './pages/NotFound.jsx'
 
 const router = createBrowserRouter([

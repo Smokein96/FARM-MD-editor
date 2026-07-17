@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { setup } from "./auth_api.js"
+import { setup } from "../api/auth_api.js"
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -37,6 +37,7 @@ export function SignIn() {
             setTimeout(() => navigate("/login"), 1500);
 
         } catch (e) {
+            navigate("*")
             notify(e.message)
         }
     }
@@ -48,7 +49,7 @@ export function SignIn() {
             <div className="w-full max-w-md bg-teal-900 rounded-xl shadow-2xl p-8 text-amber-50">
 
                 <h1 className="text-4xl font-bold text-center mb-2">
-                    Note Master
+                    Md.X
                 </h1>
 
                 <p className="text-center text-gray-300 mb-8" >
@@ -106,6 +107,16 @@ export function SignIn() {
                                    hover:shadow-lg hover:shadow-teal-500/40"
                     >
                         Create Administrator
+                    </button>
+
+                    <button
+                        type="submit"
+                        className="w-full bg-teal-600 hover:bg-teal-400
+                                   rounded p-3 font-bold transition-all
+                                   hover:shadow-lg hover:shadow-teal-500/40"
+                        onClick={() => {navigate("/LogIn")}}
+                    >
+                        Log In
                     </button>
 
                     <ToastContainer

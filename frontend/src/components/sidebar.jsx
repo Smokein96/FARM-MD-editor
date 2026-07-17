@@ -7,7 +7,7 @@ export function Sidebar({ notes, setSelected, addNote }) {
 
             {/* Top lip */}
             <div className="bg-teal-900 text-center p-2 font-bold text-xl ">
-                Note Master
+                Md.X
             </div>
 
             {/* list items */}
@@ -39,6 +39,7 @@ export function Sidebar({ notes, setSelected, addNote }) {
 
                 +
             </div>
+            
         </div>
     </>
 }
