@@ -17,11 +17,6 @@ export async function authorizedFetch(suffix, options = {}) {
         localStorage.removeItem("token");
         window.location.href = "/error";
 
-
-        throw {
-            status_code : 404,
-            message : "Expired Token, Log in again"
-        };
     }
 
     if (!response.ok) {
