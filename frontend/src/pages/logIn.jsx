@@ -34,7 +34,7 @@ export function LogIn() {
             notify("Logged in succesfully")
 
         } catch (e) {
-            navigate("error",{
+            navigate("/error",{
                 state:{
                     status_code: e.status_code,
                     error : e.message
