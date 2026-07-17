@@ -216,6 +216,7 @@ http://localhost:5173
 - Notes Dashboard
 ![DashBoard img](https://github.com/Smokein96/FARM-MD-editor/blob/main/readme_img/signIn.png)
 - Swagger Documentation
+- ![FastAPI swagger](https://github.com/Smokein96/FARM-MD-editor/blob/main/readme_img/Screenshot%202026-07-17%20at%2022-27-35%20FastAPI%20-%20Swagger%20UI.png)
 
 ---
 
