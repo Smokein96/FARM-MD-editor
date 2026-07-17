@@ -15,7 +15,7 @@ export async function authorizedFetch(suffix, options = {}) {
 
     if (response.status === 401) {
         localStorage.removeItem("token");
-        window.location.href = "*";
+        window.location.href = "/error";
 
 
         throw {

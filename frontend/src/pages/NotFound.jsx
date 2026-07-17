@@ -15,7 +15,7 @@ export function NotFound() {
                 <h1 className="text-3xl font-bold">{error}</h1>
 
                 <p className="text-gray-300 text-sm max-w-xs mx-auto">
-                    The page you're looking for doesn't exist or has been moved.
+                    The page you're looking for doesn't exist or has been moved. PLEASE LOG IN AGAIN
                 </p>
 
                 <div className="flex gap-4 justify-center">
